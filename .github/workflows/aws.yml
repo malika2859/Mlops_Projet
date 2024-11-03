@@ -5,12 +5,12 @@ on:
     branches: [ "main" ]
 
 env:
-  AWS_REGION: &aws-region eu-west-3               # set this to your preferred AWS region
-  ECR_REPOSITORY: projet_mlops                    # set this to your Amazon ECR repository name
-  ECS_SERVICE: malika_service                     # set this to your Amazon ECS service name
-  ECS_CLUSTER: mlops_cluster                      # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: malika_tache               # set this to the path to your Amazon ECS task definition
-  CONTAINER_NAME: malika_conteneur                # set this to the name of the container in the task definition
+  AWS_REGION: eu-west-3                   # Preferred AWS region, e.g., us-west-1
+  ECR_REPOSITORY: projet_mlops            # Amazon ECR repository name
+  ECS_SERVICE: malika_service             # Amazon ECS service name
+  ECS_CLUSTER: mlops_cluster              # Amazon ECS cluster name
+  ECS_TASK_DEFINITION: malika_tache       # Path to the Amazon ECS task definition file, e.g., .aws/task-definition.json
+  CONTAINER_NAME: malika_conteneur        # Name of the container in the containerDefinitions section of your task definition
 
 permissions:
   contents: read
@@ -26,11 +26,11 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v2
+      uses: aws-actions/configure-aws-credentials@v2    # Updated to v2 for Node.js 16 compatibility
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: *aws-region   # Uses the YAML anchor for region
+        aws-region: ${{ env.AWS_REGION }}
 
     - name: Login to Amazon ECR
       id: login-ecr
@@ -42,16 +42,15 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        # Build a Docker container and push it to ECR for ECS deployment.
-        
+        # Build a Docker container and push it to ECR so that it can be deployed to ECS.
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
     - name: Download task definition
       run: |
-          aws ecs describe-task-definition --task-definition ${{ env.ECS_TASK_DEFINITION }} \
-          --query taskDefinition > task-definition.json
+        aws ecs describe-task-definition --task-definition ${{ env.ECS_TASK_DEFINITION }} \
+        --query taskDefinition > task-definition.json
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
