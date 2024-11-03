@@ -1,0 +1,15 @@
+artifact_uri: file:///c:/Users/ec/OneDrive/Bureau/Projet_Mlops_best/mlruns/247502922017750485/0a5320f758ef4678962fb7f3cc9e7328/artifacts
+end_time: 1730634918484
+entry_point_name: ''
+experiment_id: '247502922017750485'
+lifecycle_stage: active
+run_id: 0a5320f758ef4678962fb7f3cc9e7328
+run_name: Logistic_Regression_Model
+run_uuid: 0a5320f758ef4678962fb7f3cc9e7328
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1730634896693
+status: 3
+tags: []
+user_id: ec

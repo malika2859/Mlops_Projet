@@ -1,0 +1,8 @@
+Flask==2.1.2
+pytest==7.1.2
+pylint==2.15.0
+black==22.6.0
+pandas==1.5.3
+Werkzeug==2.2.2
+numpy==1.26.2
+scikit-learn==1.1.3  

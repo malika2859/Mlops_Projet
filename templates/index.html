@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Analyse Prédictive</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        
+        body {
+            display: flex; 
+            background: #ccc url('/static/img/img2.png') no-repeat;
+            background-size: cover;
+            background-position: center;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .contenair {
+            width: clamp(450px, 550px, 90%);
+            margin: auto;
+            margin-top: 5%;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 20px 40px;
+            box-shadow: 5px 5px 10px 8px rgba(49, 48, 48, 0.961);
+        }
+
+        button {
+            width: 100%;
+            color: white;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: coral;
+        }
+
+        .prediction-text {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contenair">
+        <form action="{{ url_for('predict') }}" method="post">
+            <h3 class="text-center fw-bold">Analyse Prédictive</h3>
+            <div class="row g-2">
+                <div class="col-md-6 mt-3">
+                    <label for="credit_lines_outstanding">Nombre de lignes de crédit</label>
+                    <input class="form-control" type="number" id="credit_lines_outstanding" name="credit_lines_outstanding" required>
+                </div>
+                <div class="col-md-6 mt-3">
+                    <label for="loan_amt_outstanding">Montant du prêt en cours</label>
+                    <input class="form-control" type="number" step="0.01" id="loan_amt_outstanding" name="loan_amt_outstanding" required>
+                </div>
+                <div class="col-md-6 mt-3">
+                    <label for="total_debt_outstanding">Total des dettes en cours</label>
+                    <input class="form-control" type="number" step="0.01" id="total_debt_outstanding" name="total_debt_outstanding" required>
+                </div>
+                <div class="col-md-6 mt-3">
+                    <label for="income">Revenu</label>
+                    <input class="form-control" type="number" step="0.01" id="income" name="income" required>
+                </div>
+                <div class="col-md-6 mt-3">
+                    <label for="years_employed">Années d'emploi</label>
+                    <input class="form-control" type="number" id="years_employed" name="years_employed" required>
+                </div>
+                <div class="col-md-6 mt-3">
+                    <label for="fico_score">Score FICO</label>
+                    <input class="form-control" type="number" id="fico_score" name="fico_score" required>
+                </div>
+                <div class="col-md-12 mt-4">
+                    <button type="submit">Résultat</button>
+                </div>
+            </div>
+        </form>
+        
+        <div class="mt-4 text-center prediction-text">
+            {{ prediction_text }}
+        </div>
+    </div>
+</body>
+</html>
