@@ -10,10 +10,13 @@
 
 
 🚀 Projet MLOps
+
 📌 Description
+
 Ce projet s'inscrit dans une démarche MLOps visant à automatiser le cycle de vie du machine learning, de l'entraînement au déploiement des modèles. Il met en œuvre des outils modernes pour assurer la reproductibilité, le suivi des expériences et l'intégration continue des modèles.
 
 🏗️ Stack technologique
+
 Le projet utilise plusieurs outils et bibliothèques pour gérer l’ensemble du pipeline machine learning :
 
 MLflow : suivi des expériences, gestion des modèles et déploiement.
@@ -21,13 +24,17 @@ Flask : API légère pour servir les modèles en production.
 Scikit-learn : entraînement et évaluation des modèles (RandomForest, etc.).
 Jinja2 : génération dynamique des rapports et dashboards.
 Virtual Environment (venv/conda) : isolation des dépendances.
+
 📌 Fonctionnalités principales
+
 Tracking des expériences avec MLflow
 Entraînement et évaluation d’un modèle de Machine Learning
 Versioning et gestion des artefacts
 Déploiement local d’un modèle via Flask
 Automatisation du pipeline avec CI/CD
+
 📦 Installation
+
 Clonez le repo et installez les dépendances :
 
 bash
@@ -42,7 +49,9 @@ bash
 Copier
 Modifier
 mlflow server --host 127.0.0.1 --port 8080
+
 🚀 Utilisation
+
 Entraînement du modèle :
 bash
 Copier
