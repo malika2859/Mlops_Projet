@@ -40,9 +40,13 @@ Clonez le repo et installez les dépendances :
 bash
 Copier
 Modifier
+
 git clone https://github.com/ton-repo/mlops-projet.git
+
 cd mlops-projet
+
 pip install -r requirements.txt
+
 Lancez un serveur MLflow local :
 
 bash
